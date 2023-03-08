@@ -9,10 +9,10 @@ public class ExchangeRateParser {
     //Open and read the file, breaking it into lines and removing blank lines
     ArrayList<String> fxFileLines = FileManager.readFileByName(filePath);
         // Iterator.remove()
-        Iterator itr = fxFileLines.iterator();
+        Iterator<String> itr = fxFileLines.iterator();
         while (itr.hasNext())
         {
-            String lineValue = (String)itr.next();
+            String lineValue = itr.next();
             if (Objects.equals(lineValue, ""))
                 itr.remove();
         }
@@ -36,14 +36,13 @@ public class ExchangeRateParser {
 
             // Extract exchange rates from second line
             // First, split the string into an array with "Mmm ddrr.rr"
-            MyStringParser parser = new MyStringParser();
-            String [] tokens = parser.parseStringIntoArray(fxLines.get(linePair+1),11);
+            String [] tokens = MyStringParser.parseStringIntoArray(fxLines.get(linePair+1),11);
 
             //Now, use the year and month from above along with the date and rate from the array to create array lists of date and associated rates
-            for (int i = 0; i < tokens.length; i ++) {
+            for (String token : tokens) {
                 try {
-                    String dateString = monthString + " " + tokens[i].substring(4, 6) + ", " + yearString;
-                    historicalRates.add(Double.parseDouble(tokens[i].substring(6, 11)));
+                    String dateString = monthString + " " + token.substring(4, 6) + ", " + yearString;
+                    historicalRates.add(Double.parseDouble(token.substring(6, 11)));
                     Date date = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH).parse(dateString);
                     historicalDates.add(date);
                 } catch (ParseException e) {

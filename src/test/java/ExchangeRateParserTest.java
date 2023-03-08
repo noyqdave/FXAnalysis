@@ -38,7 +38,7 @@ class ExchangeRateParserTest {
     void readFxFile() {
         //Set up test file and data
         String testFilePath = "/Users/Testing/CADTHBFXRates.txt";
-        ArrayList<String> testFxLines = new ArrayList<String>();
+        ArrayList<String> testFxLines = new ArrayList<>();
         testFxLines.add("CAD/THB (Canadian dollar/Thai baht) Dec 2019 (12.2019) exchange rate history");
         testFxLines.add("Dec 3122.93Dec 3022.93Dec 2723.05Dec 2422.92Dec 2322.93Dec 2022.94Dec 1923.01Dec 1823.03Dec 1722.98Dec 1623.00Dec 1322.92Dec 1222.88Dec 1122.92Dec 1022.90Dec 0922.90Dec 0622.90Dec 0523.05Dec 0422.92Dec 0322.76Dec 0222.77");
         testFxLines.add("CAD/THB (Canadian dollar/Thai baht) Nov 2019 (11.2019) exchange rate history");
@@ -52,8 +52,8 @@ class ExchangeRateParserTest {
     @Test
     void testParsingToArrayLists() {
         // Setup the expected result and the input strings
-        ArrayList<Date> expectedDates = new ArrayList<Date>();
-        ArrayList<Double> expectedRates = new ArrayList<Double>();
+        ArrayList<Date> expectedDates = new ArrayList<>();
+        ArrayList<Double> expectedRates = new ArrayList<>();
         HistoricalFxRates expectedFxHistory = new HistoricalFxRates();
 
         // TODO: way too much work to set up this expected result
@@ -86,7 +86,7 @@ class ExchangeRateParserTest {
         expectedFxHistory.setHistoricalRates(expectedRates);
 
 
-        ArrayList<String> inputLines = new ArrayList<String>();
+        ArrayList<String> inputLines = new ArrayList<>();
         inputLines.add("CAD/THB (Canadian dollar/Thai baht) Dec 2019 (12.2019) exchange rate history");
         inputLines.add("Dec 3122.93Dec 3022.93Dec 2723.05");
         inputLines.add("CAD/THB (Canadian dollar/Thai baht) Nov 2019 (11.2019) exchange rate history");
