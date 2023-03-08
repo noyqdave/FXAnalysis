@@ -9,17 +9,10 @@ public class ExchangeRateParser {
     //Open and read the file, breaking it into lines and removing blank lines
     ArrayList<String> fxFileLines = FileManager.readFileByName(filePath);
         // Iterator.remove()
-        Iterator<String> itr = fxFileLines.iterator();
-        while (itr.hasNext())
-        {
-            String lineValue = itr.next();
-            if (Objects.equals(lineValue, ""))
-                itr.remove();
-        }
+        fxFileLines.removeIf(lineValue -> Objects.equals(lineValue, ""));
         return fxFileLines;
 }
     //Look through the pairs and parse the data into pairs of dates and rates
-
 
     public HistoricalFxRates parseDatesRatesFromLines(ArrayList<String> fxLines) {
 

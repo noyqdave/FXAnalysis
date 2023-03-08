@@ -7,7 +7,8 @@ class MyStringParserTest {
      void testOneValue() {
         String testString = "Nov 2922.74";
         String [] expectedStrings = {"Nov 2922.74"};
-        Assertions.assertEquals(expectedStrings, MyStringParser.parseStringIntoArray(testString,11));
+        String [] actualStrings = MyStringParser.parseStringIntoArray(testString,11);
+        Assertions.assertArrayEquals(expectedStrings, actualStrings);
     }
 
     @Test
