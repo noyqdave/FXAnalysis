@@ -11,7 +11,6 @@ public class FileManager {
         try {
             if (!newFile.exists()) {
                     boolean success = newFile.createNewFile();
-                // happy
             } else {
                 newFile = null;
             }
@@ -30,7 +29,6 @@ public class FileManager {
             for (String line : lines) {
                 myWriter.write(line + "\n");
             }
-
             myWriter.flush();
             myWriter.close();
         } catch (IOException e) {
@@ -43,7 +41,6 @@ public class FileManager {
         ArrayList<String> lines = new ArrayList<>();
         try {
             Scanner myReader = new Scanner(fileReading);
-
             while (myReader.hasNextLine()) {
                 lines.add(myReader.nextLine());
             }
@@ -54,20 +51,19 @@ public class FileManager {
         }
         return lines;
     }
-
+    // read a file, passing in a String path and name
     public static ArrayList<String> readFileByName (String pathAndName) {
         ArrayList<String> lines = new ArrayList<>();
-        //Access the file by path and name, returning a File object
         File thisFile = new File(pathAndName);
         if (thisFile.exists()) {
-            //Call the readFileObject method
+            // now that we have a File object, call the readFileObject method
             lines = readFileObject(thisFile);
         }
         return lines;
     }
 
     // delete a file
-    public static Boolean deleteFile(File fileBeingDeleted) {
+    public static boolean deleteFile(File fileBeingDeleted) {
         boolean result;
         try {
             result = fileBeingDeleted.delete();

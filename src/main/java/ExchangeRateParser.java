@@ -11,18 +11,14 @@ public class ExchangeRateParser {
 
     //Open and read the file, breaking it into lines and removing blank lines
     ArrayList<String> fxFileLines = FileManager.readFileByName(filePath);
-        // Iterator.remove()
-        fxFileLines.removeIf(lineValue -> Objects.equals(lineValue, ""));
-        return fxFileLines;
+    fxFileLines.removeIf(lineValue -> Objects.equals(lineValue, ""));
+    return fxFileLines;
 }
-    //Look through the pairs and parse the data into pairs of dates and rates
 
     public HistoricalFxRates parseDatesRatesFromLines(ArrayList<String> fxLines) {
 
+        //Look through the pairs and parse the data into pairs of dates and rates
         HistoricalFxRates fxHistory = new HistoricalFxRates();
-        //ArrayList<Date> historicalDates = new ArrayList<>();
-        //ArrayList<Double> historicalRates = new ArrayList<>();
-        //List<Pair<Date, Double>> historicalFxRates = new ArrayList<Pair<Date, Double>>();
 
         //Loop through the lines 2 at a time
         for (int linePair = 0; linePair < fxLines.size(); linePair += 2) {
@@ -40,22 +36,15 @@ public class ExchangeRateParser {
                 try {
                     String dateString = monthString + " " + token.substring(4, 6) + ", " + yearString;
                     Date date = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH).parse(dateString);
-                    //historicalDates.add(date);
                     Double rate = Double.parseDouble(token.substring(6, 11));
                     fxHistory.put(date, rate);
-                    //historicalRates.add(Double.parseDouble(token.substring(6, 11)));
-                    //Pair<Date, Double> dateRatePair = new Pair<>(date, rate);
-                    //historicalFxRates.add(dateRatePair);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        //fxHistory.setHistoricalDates(historicalDates);
-        //fxHistory.setHistoricalRates(historicalRates);
         return fxHistory;
-        //return historicalFxRates;
     }
 }
 
