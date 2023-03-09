@@ -1,6 +1,9 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 
 public class ExchangeRateParser {
 
@@ -17,8 +20,9 @@ public class ExchangeRateParser {
     public HistoricalFxRates parseDatesRatesFromLines(ArrayList<String> fxLines) {
 
         HistoricalFxRates fxHistory = new HistoricalFxRates();
-        ArrayList<Date> historicalDates = new ArrayList<>();
-        ArrayList<Double> historicalRates = new ArrayList<>();
+        //ArrayList<Date> historicalDates = new ArrayList<>();
+        //ArrayList<Double> historicalRates = new ArrayList<>();
+        //List<Pair<Date, Double>> historicalFxRates = new ArrayList<Pair<Date, Double>>();
 
         //Loop through the lines 2 at a time
         for (int linePair = 0; linePair < fxLines.size(); linePair += 2) {
@@ -35,18 +39,23 @@ public class ExchangeRateParser {
             for (String token : tokens) {
                 try {
                     String dateString = monthString + " " + token.substring(4, 6) + ", " + yearString;
-                    historicalRates.add(Double.parseDouble(token.substring(6, 11)));
                     Date date = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH).parse(dateString);
-                    historicalDates.add(date);
+                    //historicalDates.add(date);
+                    Double rate = Double.parseDouble(token.substring(6, 11));
+                    fxHistory.put(date, rate);
+                    //historicalRates.add(Double.parseDouble(token.substring(6, 11)));
+                    //Pair<Date, Double> dateRatePair = new Pair<>(date, rate);
+                    //historicalFxRates.add(dateRatePair);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
         }
 
-        fxHistory.setHistoricalDates(historicalDates);
-        fxHistory.setHistoricalRates(historicalRates);
+        //fxHistory.setHistoricalDates(historicalDates);
+        //fxHistory.setHistoricalRates(historicalRates);
         return fxHistory;
+        //return historicalFxRates;
     }
 }
 
