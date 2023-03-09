@@ -8,13 +8,12 @@ import java.util.ArrayList;
 
 class FileManagerTest {
     String testFilePath = "/Users/Testing/";
-    ArrayList<String> testLines = new ArrayList<String>();
+    ArrayList<String> testLines = new ArrayList<>();
     static File testFile;
 
     @BeforeEach
     void setUp() {
         //Create test file
-     //   String testFile = createFile(testFilePath + "TestFile", testLines);
         testFile = FileManager.createFile(testFilePath,"TestFile");
     }
 
@@ -25,8 +24,7 @@ class FileManagerTest {
         FileManager.writeToFile(testFile, testLines);
 
         //Read from the file
-        ArrayList<String> readLines = new ArrayList<String>();
-        readLines = FileManager.readFileObject(testFile);
+        ArrayList<String> readLines = FileManager.readFileObject(testFile);
         Assertions.assertEquals(testLines.get(0), readLines.get(0));
     }
 
@@ -38,8 +36,7 @@ class FileManagerTest {
         FileManager.writeToFile(testFile, testLines);
 
         //Read from the file
-        ArrayList<String> readLines = new ArrayList<String>();
-        readLines = FileManager.readFileObject(testFile);
+        ArrayList<String> readLines = FileManager.readFileObject(testFile);
 
         // Check that what was read is what was written
         Assertions.assertEquals(testLines, readLines);
@@ -48,7 +45,7 @@ class FileManagerTest {
     @AfterEach
     void tearDown() {
         //Delete test file
-        testFile.delete();
+        boolean success = testFile.delete();
     }
 
 }

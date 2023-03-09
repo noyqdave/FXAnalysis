@@ -10,7 +10,7 @@ public class FileManager {
         File newFile = new File(path + filename);
         try {
             if (!newFile.exists()) {
-                    newFile.createNewFile();
+                    boolean success = newFile.createNewFile();
                 // happy
             } else {
                 newFile = null;
@@ -22,27 +22,25 @@ public class FileManager {
     }
 
     // write to file
-    public static String writeToFile(File fileWritten, ArrayList<String> lines) {
-        String result = new String();
+    public static void writeToFile(File fileWritten, ArrayList<String> lines) {
+
         try {
             FileWriter myWriter = new FileWriter(fileWritten);
-            Enumeration<String> lineEnumeration = Collections.enumeration(lines);
 
-            // Enumerate through the lines
-            while(lineEnumeration.hasMoreElements())
-                myWriter.write(lineEnumeration.nextElement() + "\n");
+            for (String line : lines) {
+                myWriter.write(line + "\n");
+            }
 
             myWriter.flush();
             myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return result;
     }
 
     // read a file, passing in a File object
     public static ArrayList<String> readFileObject(File fileReading) {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
         try {
             Scanner myReader = new Scanner(fileReading);
 
@@ -58,7 +56,7 @@ public class FileManager {
     }
 
     public static ArrayList<String> readFileByName (String pathAndName) {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
         //Access the file by path and name, returning a File object
         File thisFile = new File(pathAndName);
         if (thisFile.exists()) {
@@ -70,10 +68,9 @@ public class FileManager {
 
     // delete a file
     public static Boolean deleteFile(File fileBeingDeleted) {
-        boolean result = false;
+        boolean result;
         try {
-            fileBeingDeleted.delete();
-            result = true;
+            result = fileBeingDeleted.delete();
         } catch (Exception e) {
             e.printStackTrace();
             result = false;
